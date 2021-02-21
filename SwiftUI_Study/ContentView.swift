@@ -18,17 +18,14 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            addPicker()
-            HStack {
-                Text("Selected time:")
-                Text(settingsTime[section])
+            Form {
+                addPicker()
             }
-            firstLessonView()
         }
     }
     
     fileprivate func addPicker() -> Picker<Text, Int, ForEach<Range<Int>, Int, Text>> {
-        return Picker(selection: $section, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/, content: {
+        return Picker(selection: $section, label: Text("Time"), content: {
             ForEach(0..<settingsTime.count) {
                 Text(settingsTime[$0])
             }
