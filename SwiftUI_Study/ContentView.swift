@@ -8,9 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isError = false
+    
     var body: some View {
-        Text("Hello, SwiftUI!")
-            .padding()
+        showAlert()
+    }
+    
+    fileprivate func showAlert() -> some View {
+        return Button(action: {
+            self.isError = true
+        }, label: {
+            Text("Show Alert")
+        }).alert(isPresented: $isError, content: {
+                    Alert(title: Text("Alert"),
+                          message: Text("Alert Test"),
+                          primaryButton: .default(Text("Ok"), action: {
+                            print("Alert action")
+                          }),
+                          secondaryButton: .cancel())
+                 })
     }
 }
 
