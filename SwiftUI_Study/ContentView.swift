@@ -18,11 +18,17 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Form {
-                addPicker()
+            NavigationView {
+                Form {
+                    addPicker()
+                    addToggle()
+                }
+                .navigationBarTitle("Settings")
+                
             }
         }
     }
+    
     
     fileprivate func addPicker() -> Picker<Text, Int, ForEach<Range<Int>, Int, Text>> {
         return Picker(selection: $section, label: Text("Time"), content: {
