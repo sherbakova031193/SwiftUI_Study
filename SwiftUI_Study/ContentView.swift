@@ -12,16 +12,34 @@ struct ContentView: View {
     @State var isActionSheet = false
     @State var isOnToggle = false
     
+    @State var section = 0
+    var settingsTime = ["1 min", "2 min", "3 min", "4 min", "5 min"]
+    
+    
     var body: some View {
         VStack {
+            addPicker()
+            HStack {
+                Text("Selected time:")
+                Text(settingsTime[section])
+            }
+            firstLessonView()
+        }
+    }
+    
+    fileprivate func addPicker() -> Picker<Text, Int, ForEach<Range<Int>, Int, Text>> {
+        return Picker(selection: $section, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/, content: {
+            ForEach(0..<settingsTime.count) {
+                Text(settingsTime[$0])
+            }
+        })
+    }
+    
+    fileprivate func firstLessonView() -> some View {
+        return VStack {
             Text("VStack")
             ZStack {
-                VStack {
-                    Text("Menu1").frame(height: 50)
-                    Text("Menu2").frame(height: 50)
-                    Text("Menu3").frame(height: 50)
-                    Text("Menu4").frame(height: 50)
-                }.offset(x: -100)
+                addMenu()
                 addView()
             }
             addToggle()
@@ -30,6 +48,15 @@ struct ContentView: View {
             showActionSheet()
         }
         .padding()
+    }
+    
+    fileprivate func addMenu() -> some View {
+        return VStack {
+            Text("Menu1").foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/).frame(height: 50)
+            Text("Menu2").foregroundColor(.yellow).frame(height: 50)
+            Text("Menu3").foregroundColor(.pink).frame(height: 50)
+            Text("Menu4").foregroundColor(.orange).frame(height: 50)
+        }.offset(x: -100)
     }
     
     fileprivate func addHStack() -> some View {
